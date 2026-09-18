@@ -1,56 +1,33 @@
-# Programa para multiplicar dos matrices y obtener una matriz resultado
+# Multiplicación de dos matrices
 
+A = []
+B = []
 
-def multiplicar_matrices(matriz_a, matriz_b):
-	"""Devuelve el producto matricial de matriz_a por matriz_b."""
-	if not matriz_a or not matriz_b:
-		raise ValueError("Las matrices no pueden estar vacias.")
+print("Ingrese los números de la matriz A")
 
-	columnas_a = len(matriz_a[0])
-	filas_b = len(matriz_b)
+for i in range(2):
+    fila = []
+    for j in range(2):
+        fila.append(int(input(f"A[{i}][{j}]: ")))
+    A.append(fila)
 
-	if any(len(fila) != columnas_a for fila in matriz_a):
-		raise ValueError("La primera matriz debe ser rectangular.")
-	if any(len(fila) != len(matriz_b[0]) for fila in matriz_b):
-		raise ValueError("La segunda matriz debe ser rectangular.")
-	if columnas_a != filas_b:
-		raise ValueError(
-			"No se pueden multiplicar: las columnas de A deben "
-			"coincidir con las filas de B."
-		)
+print("\nIngrese los números de la matriz B")
 
-	return [
-		[
-			sum(matriz_a[fila][indice] * matriz_b[indice][columna]
-				for indice in range(columnas_a))
-			for columna in range(len(matriz_b[0]))
-		]
-		for fila in range(len(matriz_a))
-	]
+for i in range(2):
+    fila = []
+    for j in range(2):
+        fila.append(int(input(f"B[{i}][{j}]: ")))
+    B.append(fila)
 
+# Multiplicación
+C = [
+    [A[0][0]*B[0][0] + A[0][1]*B[1][0],
+     A[0][0]*B[0][1] + A[0][1]*B[1][1]],
 
-def mostrar_matriz(matriz):
-	for fila in matriz:
-		print(fila)
-
-
-# Matriz A (2 x 3) y matriz B (3 x 2).
-matriz_a = [
-	[1, 2, 3],
-	[4, 5, 6],
+    [A[1][0]*B[0][0] + A[1][1]*B[1][0],
+     A[1][0]*B[0][1] + A[1][1]*B[1][1]]
 ]
 
-matriz_b = [
-	[7, 8],
-	[9, 10],
-	[11, 12],
-]
-
-matriz_resultado = multiplicar_matrices(matriz_a, matriz_b)
-
-print("Matriz A:")
-mostrar_matriz(matriz_a)
-print("\nMatriz B:")
-mostrar_matriz(matriz_b)
-print("\nMatriz resultado (A x B):")
-mostrar_matriz(matriz_resultado)
+print("\nMatriz A:", A)
+print("Matriz B:", B)
+print("Resultado:", C)
