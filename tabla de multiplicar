@@ -1,0 +1,56 @@
+# Programa para multiplicar dos matrices y obtener una matriz resultado
+
+
+def multiplicar_matrices(matriz_a, matriz_b):
+	"""Devuelve el producto matricial de matriz_a por matriz_b."""
+	if not matriz_a or not matriz_b:
+		raise ValueError("Las matrices no pueden estar vacias.")
+
+	columnas_a = len(matriz_a[0])
+	filas_b = len(matriz_b)
+
+	if any(len(fila) != columnas_a for fila in matriz_a):
+		raise ValueError("La primera matriz debe ser rectangular.")
+	if any(len(fila) != len(matriz_b[0]) for fila in matriz_b):
+		raise ValueError("La segunda matriz debe ser rectangular.")
+	if columnas_a != filas_b:
+		raise ValueError(
+			"No se pueden multiplicar: las columnas de A deben "
+			"coincidir con las filas de B."
+		)
+
+	return [
+		[
+			sum(matriz_a[fila][indice] * matriz_b[indice][columna]
+				for indice in range(columnas_a))
+			for columna in range(len(matriz_b[0]))
+		]
+		for fila in range(len(matriz_a))
+	]
+
+
+def mostrar_matriz(matriz):
+	for fila in matriz:
+		print(fila)
+
+
+# Matriz A (2 x 3) y matriz B (3 x 2).
+matriz_a = [
+	[1, 2, 3],
+	[4, 5, 6],
+]
+
+matriz_b = [
+	[7, 8],
+	[9, 10],
+	[11, 12],
+]
+
+matriz_resultado = multiplicar_matrices(matriz_a, matriz_b)
+
+print("Matriz A:")
+mostrar_matriz(matriz_a)
+print("\nMatriz B:")
+mostrar_matriz(matriz_b)
+print("\nMatriz resultado (A x B):")
+mostrar_matriz(matriz_resultado)
